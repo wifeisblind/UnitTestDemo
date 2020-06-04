@@ -1,11 +1,35 @@
 package com.example.unittestdemo
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
+import androidx.lifecycle.*
+import com.example.unittestdemo.Resource.Success
+import kotlinx.coroutines.launch
 
-class ETagPage1ViewModel(repository: ETagRepository) : ViewModel() {
+class ETagPage1ViewModel(private val repository: ETagRepository) : ViewModel() {
+
+    private val isBusy: MutableLiveData<Boolean> = MutableLiveData()
+
+    private val commonCars: MutableLiveData<List<CommonCar>> = MutableLiveData()
+
+    fun getCommonCars(): LiveData<List<CommonCar>> = commonCars
+
+    fun getIsCommonCarVisible(): LiveData<Boolean> = commonCars.map { list ->
+        return@map list.isNotEmpty()
+    }
+
+    init {
+        fetchCommonCars()
+    }
+
+    private fun fetchCommonCars() = viewModelScope.launch {
+        isBusy.value = true
+        val resource = repository.getCommonCars()
+        isBusy.value = false
+
+        commonCars.value = when(resource) {
+            is Success -> resource.data
+            else -> emptyList()
+        }
+    }
 
     private val editCarInfo: MutableLiveData<EditCarInfo> = MutableLiveData(EditCarInfo.EMPTY)
 

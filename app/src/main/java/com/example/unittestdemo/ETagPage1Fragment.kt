@@ -3,6 +3,8 @@ package com.example.unittestdemo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,6 +21,13 @@ class ETagPage1Fragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        viewModel.getIsCommonCarVisible().observe(viewLifecycleOwner, Observer { isVisible ->
+            btnCommonCar.visibility = if (isVisible) VISIBLE else INVISIBLE
+        })
+
+        viewModel.getCommonCars().observe(viewLifecycleOwner, Observer { list ->
+        })
 
         viewModel.getIsDepositBtnEnable().observe(viewLifecycleOwner, Observer { isEnable ->
             btnDeposit.isEnabled = isEnable

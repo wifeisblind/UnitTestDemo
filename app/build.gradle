@@ -45,4 +45,5 @@ dependencies {
     testImplementation "io.mockk:mockk:1.9.3"
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.fragment:fragment-ktx:1.2.4'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
 }

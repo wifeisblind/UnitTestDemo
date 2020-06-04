@@ -20,33 +20,27 @@ class ETagPage1Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        viewModel.getIsDepositBtnEnable().observe(viewLifecycleOwner, Observer { isEnable ->
+            btnDeposit.isEnabled = isEnable
+        })
 
         editCar1.addTextChangedListener(object : TextWatchAdapter() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
+                viewModel.inputEditCar1(s.toString())
             }
         })
 
         editCar2.addTextChangedListener(object : TextWatchAdapter() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
+                viewModel.inputEditCar2(s.toString())
             }
         })
 
         editUserId.addTextChangedListener(object : TextWatchAdapter() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
+                viewModel.inputEditUserId(s.toString())
             }
         })
-
-        cbConsent.setOnCheckedChangeListener { _, isChecked ->
-        }
-
-
-        btnDeposit.setOnClickListener { v ->
-        }
-
-
     }
 
     enum class ErrorType {

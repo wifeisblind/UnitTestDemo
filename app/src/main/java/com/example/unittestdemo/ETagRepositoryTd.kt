@@ -11,4 +11,8 @@ class ETagRepositoryTd : ETagRepository {
         delay(100)
         return resourceCommonCars
     }
+
+    override suspend fun executeTrade(): Resource<String> {
+        throw NotImplementedError()
+    }
 }

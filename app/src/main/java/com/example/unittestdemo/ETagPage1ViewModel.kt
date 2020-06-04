@@ -53,4 +53,19 @@ class ETagPage1ViewModel(private val repository: ETagRepository) : ViewModel() {
                 editCar2.isNotEmpty() &&
                 editUserId.isNotEmpty()
     }
+
+    fun deposit() = viewModelScope.launch{
+        isBusy.value = true
+        val resource = repository.executeTrade()
+        isBusy.value = false
+        if (resource is Success) {
+            tradeTime.value = resource.data
+        }
+    }
+
+    private val tradeTime: MutableLiveData<String> = MutableLiveData()
+
+    fun getTradeTime(): LiveData<String> {
+        return tradeTime
+    }
 }

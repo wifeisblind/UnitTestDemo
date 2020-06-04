@@ -12,4 +12,8 @@ class ETagRepositoryImp : ETagRepository {
 //            cont.resume(Success(emptyList()))
         }, 1000)
     }
+
+    override suspend fun executeTrade(): Resource<String> {
+        throw NotImplementedError()
+    }
 }

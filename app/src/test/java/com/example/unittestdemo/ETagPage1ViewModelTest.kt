@@ -93,4 +93,19 @@ class ETagPage1ViewModelTest {
         assertFalse(isVisible)
         assertTrue(commonCars.isEmpty())
     }
+
+    @Test
+    fun getTradeTime_apiSuccess_returnTradeTime() {
+        // arrange
+        coEvery {
+            mockRepository.executeTrade()
+        } returns Success("2020/06/06 10:00:00")
+
+        // act
+        SUT.deposit()
+        val time = SUT.getTradeTime().getOrAwaitValue()
+
+        // assert
+        assertThat(time, `is`("2020/06/06 10:00:00"))
+    }
 }

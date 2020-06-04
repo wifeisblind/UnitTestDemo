@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constParkingFeeCHSearch"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:id="@+id/tvCarTitle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_parking_fee_top_bottom_line"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp"
+        android:text="車牌號碼"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText style="@style/EditTextInputStyle"
+        android:id="@+id/editCar1"
+        android:layout_height="0dp"
+        android:layout_width="76dp"
+        android:layout_marginStart="84dp"
+        android:hint="ABC"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:maxLength="4"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCarTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvCarTitle"
+        android:autofillHints="car" />
+
+    <View
+        android:id="@+id/hyphen1"
+        android:layout_width="5dp"
+        android:layout_height="1dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/editCar1"
+        app:layout_constraintStart_toEndOf="@+id/editCar1"
+        app:layout_constraintTop_toTopOf="@+id/editCar1" />
+
+    <EditText style="@style/EditTextInputStyle"
+        android:id="@+id/editCar2"
+        android:layout_width="72dp"
+        android:layout_height="0dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:hint="1234"
+        android:maxLength="4"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCarTitle"
+        app:layout_constraintStart_toEndOf="@+id/hyphen1"
+        app:layout_constraintTop_toTopOf="@+id/tvCarTitle"
+        android:autofillHints="car" />
+
+    <TextView
+        android:id="@+id/tvUserId"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_parking_fee_bottom_line"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp"
+        android:text="用戶證號"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/tvCarTitle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <EditText style="@style/EditTextInputStyle"
+        android:id="@+id/editUserId"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="100dp"
+        android:hint="請輸入身分證字號或統一號碼"
+        android:maxLength="12"
+        app:layout_constraintBottom_toBottomOf="@+id/tvUserId"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvUserId"
+        android:autofillHints="car" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

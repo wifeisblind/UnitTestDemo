@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5">
+
+    <TextView
+        android:id="@+id/tvPage1Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="請輸入欲儲值車號"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/btnCommonCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="常用儲值車號"
+        android:textColor="#2962FF"
+        android:textSize="15sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/layCarEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible"/>
+
+    <include
+        android:id="@+id/layCarEdit"
+        layout="@layout/lay_etag_car_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvPage1Title"
+        tools:showIn="@layout/lay_etag_car_edit" />
+
+    <CheckBox
+        android:id="@+id/cbCommon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="0dp"
+        android:layout_marginEnd="0dp"
+        android:textSize="13sp"
+        android:checked="true"
+        android:textColor="#6F6F6F"
+        android:text="設定為常用車牌號碼"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layCarEdit" />
+
+    <CheckBox
+        android:id="@+id/cbConsent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="0dp"
+        android:textColor="#6F6F6F"
+        android:text="我已閱讀並同意"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbCommon" />
+
+    <TextView
+        android:id="@+id/btnCaution"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:text="注意事項"
+        android:textColor="#2962FF"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cbConsent"
+        app:layout_constraintStart_toEndOf="@+id/cbConsent"
+        app:layout_constraintTop_toTopOf="@+id/cbConsent" />
+
+    <Button
+        android:id="@+id/btnDeposit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="儲值"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbConsent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:text="儲值車號與繳款帳戶須為同一人，並限活期性存款帳戶進行繳費"
+        app:layout_constraintTop_toBottomOf="@+id/btnDeposit" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

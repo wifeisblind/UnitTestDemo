@@ -10,15 +10,17 @@ class ETagPage1ViewModel(private val repository: ETagRepository) : ViewModel() {
 
     private val commonCars: MutableLiveData<List<CommonCar>> = MutableLiveData()
 
-    fun getCommonCars(): LiveData<List<CommonCar>> = commonCars
+    fun getCommonCars(): LiveData<List<CommonCar>> = commonCars.also {
+        fetchCommonCars()
+    }
 
     fun getIsCommonCarVisible(): LiveData<Boolean> = commonCars.map { list ->
         return@map list.isNotEmpty()
     }
 
-    init {
-        fetchCommonCars()
-    }
+//    init {
+//        fetchCommonCars()
+//    }
 
     private fun fetchCommonCars() = viewModelScope.launch {
         isBusy.value = true

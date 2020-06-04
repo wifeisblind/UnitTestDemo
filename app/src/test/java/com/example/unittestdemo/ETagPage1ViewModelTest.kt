@@ -2,10 +2,10 @@ package com.example.unittestdemo
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.example.unittestdemo.Resource.NetworkError
 import com.example.unittestdemo.Resource.Success
-import io.mockk.mockk
-import io.mockk.verify
-import io.mockk.verifyOrder
+import io.mockk.*
+import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Before
@@ -26,10 +26,14 @@ class ETagPage1ViewModelTest {
 
     lateinit var repositoryTd: ETagRepositoryTd
 
+    @MockK
+    lateinit var mockRepository: ETagRepository
+
     @Before
     fun setUp() {
+        MockKAnnotations.init(this)
         repositoryTd = ETagRepositoryTd()
-        SUT = ETagPage1ViewModel(repositoryTd)
+        SUT = ETagPage1ViewModel(mockRepository)
     }
 
     @Test
@@ -71,5 +75,22 @@ class ETagPage1ViewModelTest {
         assertThat(carPlate, `is`("BBB-2222"))
         assertThat(userId, `is`("A222222222"))
         assertThat(seq, `is`("002"))
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun getCommonCars_apiSuccess_returnEmptyList() {
+        // arrange
+        coEvery {
+            mockRepository.getCommonCars()
+        } returns NetworkError("404 Not found")
+
+        // act
+        val commonCars = SUT.getCommonCars().getOrAwaitValue()
+        val isVisible = SUT.getIsCommonCarVisible().getOrAwaitValue()
+
+        // assert
+        assertFalse(isVisible)
+        assertTrue(commonCars.isEmpty())
     }
 }

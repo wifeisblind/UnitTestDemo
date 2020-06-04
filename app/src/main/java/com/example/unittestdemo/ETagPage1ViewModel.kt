@@ -1,6 +1,7 @@
 package com.example.unittestdemo
 
 import androidx.lifecycle.*
+import com.example.unittestdemo.ErrorType.USER_ID_ERROR
 import com.example.unittestdemo.Resource.Success
 import kotlinx.coroutines.launch
 
@@ -55,6 +56,13 @@ class ETagPage1ViewModel(private val repository: ETagRepository) : ViewModel() {
     }
 
     fun deposit() = viewModelScope.launch{
+        val (car1, car2, userId) = editCarInfo.value ?: return@launch
+
+        if (userId.length < 8) {
+            errorType.value = USER_ID_ERROR
+            return@launch
+        }
+
         isBusy.value = true
         val resource = repository.executeTrade()
         isBusy.value = false
@@ -67,5 +75,11 @@ class ETagPage1ViewModel(private val repository: ETagRepository) : ViewModel() {
 
     fun getTradeTime(): LiveData<String> {
         return tradeTime
+    }
+
+    private val errorType: MutableLiveData<ErrorType> = MutableLiveData()
+
+    fun getErrorType(): LiveData<ErrorType> {
+        return errorType
     }
 }

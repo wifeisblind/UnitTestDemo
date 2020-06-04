@@ -51,10 +51,4 @@ class ETagPage1Fragment : Fragment() {
             }
         })
     }
-
-    enum class ErrorType {
-        CAR_ERROR,
-        USER_ID_ERROR,
-        GET_UUID_ERROR
-    }
 }

@@ -108,4 +108,18 @@ class ETagPage1ViewModelTest {
         // assert
         assertThat(time, `is`("2020/06/06 10:00:00"))
     }
+
+    @Test
+    fun getErrorType_userIdInputLength7_returnUserInputError() {
+        // arrange
+        SUT.inputEditUserId("1234567")
+
+        // act
+        SUT.deposit()
+        val errorType = SUT.getErrorType().getOrAwaitValue()
+
+        // assert
+        assertThat(errorType, `is`(ErrorType.USER_ID_ERROR))
+        coVerify(exactly = 0) { mockRepository.executeTrade() }
+    }
 }

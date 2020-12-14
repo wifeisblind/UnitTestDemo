@@ -28,7 +28,7 @@ class ETagPage1ViewModelTest {
     @Test
     fun getIsButtonEnable_inputAllInfo_isButtonEnableFromFalseToTrue() {
         // arrange
-        val isButtonEnable = mockk<Observer<Boolean>>()
+        val isButtonEnable = mockk<Observer<Boolean>>(relaxUnitFun = true)
         SUT.getIsButtonEnable().observeForever(isButtonEnable)
 
         // act

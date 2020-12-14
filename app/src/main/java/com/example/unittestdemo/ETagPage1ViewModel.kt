@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ETagPage1ViewModel : ViewModel() {
+class ETagPage1ViewModel(repo: ETagRepository) : ViewModel() {
 
     private val info: EditCarInfo = EditCarInfo.EMPTY
 
@@ -34,4 +34,12 @@ class ETagPage1ViewModel : ViewModel() {
     private val isButtonEnable: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun getIsButtonEnable(): LiveData<Boolean> = isButtonEnable
+
+    fun clickDeposit() {
+        
+    }
+
+    fun getNavigationEvent(): LiveData<Unit> {
+        return MutableLiveData()
+    }
 }

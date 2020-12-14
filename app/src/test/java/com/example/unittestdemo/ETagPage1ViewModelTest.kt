@@ -12,6 +12,9 @@ import org.junit.Test
 class ETagPage1ViewModelTest {
 
     @get:Rule
+    val coRule = TestCoroutineRule()
+
+    @get:Rule
     val rule = InstantTaskExecutorRule()
 
     lateinit var SUT: ETagPage1ViewModel

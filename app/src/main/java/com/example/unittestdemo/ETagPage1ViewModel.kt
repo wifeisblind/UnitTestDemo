@@ -3,8 +3,13 @@ package com.example.unittestdemo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.unittestdemo.Resource.Success
+import kotlinx.coroutines.launch
 
-class ETagPage1ViewModel(repo: ETagRepository) : ViewModel() {
+class ETagPage1ViewModel(private val repo: ETagRepository) : ViewModel() {
+
+    private val navigationEvent: MutableLiveData<Unit> = MutableLiveData()
 
     private val info: EditCarInfo = EditCarInfo.EMPTY
 
@@ -35,11 +40,14 @@ class ETagPage1ViewModel(repo: ETagRepository) : ViewModel() {
 
     fun getIsButtonEnable(): LiveData<Boolean> = isButtonEnable
 
-    fun clickDeposit() {
-        
+    fun clickDeposit() = viewModelScope.launch {
+        when(repo.deposit(info)) {
+            is Success -> navigationEvent.value = Unit
+            else -> {
+                // error handling
+            }
+        }
     }
 
-    fun getNavigationEvent(): LiveData<Unit> {
-        return MutableLiveData()
-    }
+    fun getNavigationEvent(): LiveData<Unit> = navigationEvent
 }

@@ -9,7 +9,7 @@ class ETagViewModelFactory : ViewModelProvider.Factory {
 
         @Suppress("UNCHECKED_CAST")
         return when(modelClass) {
-            ETagPage1ViewModel::class.java -> ETagPage1ViewModel()
+//            ETagPage1ViewModel::class.java -> ETagPage1ViewModel(repo)
             else -> throw RuntimeException("No Such ViewModel")
         } as T
     }

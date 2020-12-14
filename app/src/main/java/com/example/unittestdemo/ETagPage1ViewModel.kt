@@ -1,9 +1,6 @@
 package com.example.unittestdemo
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.unittestdemo.Resource.Success
 import kotlinx.coroutines.launch
 
@@ -11,37 +8,29 @@ class ETagPage1ViewModel(private val repo: ETagRepository) : ViewModel() {
 
     private val navigationEvent: MutableLiveData<Unit> = MutableLiveData()
 
-    private val info: EditCarInfo = EditCarInfo.EMPTY
+    private val info: MutableLiveData<EditCarInfo> = MutableLiveData(EditCarInfo.EMPTY)
 
     fun inputCarPlate(car1: String, car2: String) {
-        info.editCar1 = car1
-        info.editCar2 = car2
-        checkInfo()
+        info.value = info.value?.copy(editCar1 = car1, editCar2 = car2)
     }
 
     fun inputUserId(userId: String) {
-        info.editUserId = userId
-        checkInfo()
+        info.value = info.value?.copy(editUserId = userId)
     }
 
     fun inputCheckBox(isChecked: Boolean) {
-        info.isChecked = isChecked
-        checkInfo()
+        info.value = info.value?.copy(isChecked = isChecked)
     }
 
-    private fun checkInfo() {
-        isButtonEnable.value = (info.editCar1.isNotEmpty()
-                && info.editCar2.isNotEmpty()
-                && info.editUserId.isNotEmpty()
-                && info.isChecked)
+    fun getIsButtonEnable(): LiveData<Boolean> = Transformations.map(info) {
+        (it.editCar1.isNotEmpty()
+                && it.editCar2.isNotEmpty()
+                && it.editUserId.isNotEmpty()
+                && it.isChecked)
     }
-
-    private val isButtonEnable: MutableLiveData<Boolean> = MutableLiveData(false)
-
-    fun getIsButtonEnable(): LiveData<Boolean> = isButtonEnable
 
     fun clickDeposit() = viewModelScope.launch {
-        when(repo.deposit(info)) {
+        when(repo.deposit(info.value!!)) {
             is Success -> navigationEvent.value = Unit
             else -> {
                 // error handling
